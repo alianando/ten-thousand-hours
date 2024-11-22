@@ -27,8 +27,9 @@ class Point {
 
   @override
   String toString() {
-    // String dt = "dt:!${dt.hour}:${dt.minute}:${dt.second}.${dt.microsecond}!";
-    return '$relativePosition[dt: ${dt.toString()}, d_$duration, {${point.dx}, ${point.dy}}]_';
+    String dayString = "dt:!${dt.hour}:${dt.minute}:${dt.second}";
+    // '$relativePosition[dt: ${dt.toString()}, d_$duration, {${point.dx}, ${point.dy}}]_';
+    return '[$dayString, ${point.dy}]';
   }
 
   @override
@@ -78,11 +79,45 @@ class Event {
     data['d'] = d?.inSeconds.toString();
     return data;
   }
+
+  @override
+  String toString() {
+    String ets = 'null';
+    if (et != null) ets = '${et!.hour}:${et!.minute}:${et!.second}';
+    return "[${st.hour}:${st.minute}:${st.second}__$ets]";
+    // return '[${st.toString()}##${et.toString()}]';
+  }
 }
+
+class Record {
+  List<List<Event>> dayEvents;
+  Record({required this.dayEvents});
+
+  @override
+  String toString() {
+    return '[${dayEvents.toString()}]';
+  }
+}
+
+class Day {
+  List<Point> dayPoints;
+
+  Day({required this.dayPoints});
+
+  @override
+  String toString() {
+    // String v = 'null';
+    // if (dayPoints.isNotEmpty) {
+    //   v = '${dayPoints.first.dt}:::${dayPoints.toString()}';
+    // }
+    return dayPoints.toString();
+  }
+}
+
 
 // enum SessionStatus {
 //   onGoing,
-//   onPause,
+//   onPause,u
 //   ended,
 // }
 
